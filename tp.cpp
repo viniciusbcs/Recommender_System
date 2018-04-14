@@ -3,6 +3,8 @@
 #include <fstream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <cstdlib>
+//#define _GNU_SOURCE
 
 using namespace std;
 
@@ -25,20 +27,17 @@ int main(int argc, char *argv[]) {
     cout << "O arquivo não pode ser aberto.\n";
     exit(1);
   } 
-
-  ch = getc(fp);
-  ch2 = getc(fp2);
   
-  while (ch!=EOF) {
-    putchar(ch);
-    ch = getc(fp);
+  while(ch != EOF){
+    if(ch == ','){
+      cout << " ";
+    }else {
+    cout << ch;
+    }
+    ch = gets(fp);
   }
-
-  while (ch2!=EOF) {
-    putchar(ch2);
-    ch2 = getc(fp2);
-  }
-    
+  cout << "\n";
+  
   fclose(fp2);
   fclose(fp);
   return 0;
