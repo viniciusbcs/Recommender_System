@@ -4,7 +4,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <cstdlib>
-
+#include <string>
+#include <sstream>
+#include <iomanip>
+#include <cstring>
+#include <list>
 using namespace std;
 
 int main(int argc, char *argv[]) {
@@ -37,17 +41,15 @@ int main(int argc, char *argv[]) {
 
   char str[255];
   char str2[255];
-
+  
   //Ignoring the fst line
-  in.ignore(25, '\n');
+  in.ignore(100, '\n');
   in2.ignore(20, '\n');
 
   //reading ratings.csv
-  while(in) {
-    in.getline(str, 255);  // delim defaults to '\n'
-    v1[i] = str;
-    i += 1; 
-    //if(in) cout << str << endl;
+  while(in) { 
+    in.getline(str, 255);  // delim defaults to '\n'    
+    if(in) cout << str << endl;
   }
 
   //reading targests.csv
@@ -58,6 +60,6 @@ int main(int argc, char *argv[]) {
   }
   
   in.close();
-
+  in2.close();
   return 0;
 }
