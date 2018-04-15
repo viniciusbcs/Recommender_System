@@ -4,41 +4,60 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <cstdlib>
-//#define _GNU_SOURCE
 
 using namespace std;
 
 int main(int argc, char *argv[]) {
-  FILE *fp;
-  FILE *fp2;
-  char ch, ch2;
+  
+  //vector to put file content
+  vector<char> v1;
+  vector<int> v2;
+  
+  //counter
+  int i = 0;
+  int ii = 0;
 
+  //Opening ratings.csv and targets.csv
+  char ch;
   if(argc!=3) {
-    cout << "Você esqueceu de digitar o nome do arquivo.\n";
-    exit(1);
+    cout << "Usage: tp ratings.csv targets.csv\n";
+    return 1;
+  }
+  ifstream in(argv[1]); // input
+  ifstream in2(argv[2]); // input 2
+  if(!in) {
+    cout << "Cannot open ratings.csv.\n";
+    return 1;
   }
 
-  if((fp=fopen(argv[1], "r"))==NULL) {
-    cout << "O arquivo não pode ser aberto.\n";
-    exit(1);
+  if(!in2) {
+    cout << "Cannot open targets.csv.\n";
+    return 1;
   }
-	
-  if((fp2=fopen(argv[2],"r"))==NULL) {
-    cout << "O arquivo não pode ser aberto.\n";
-    exit(1);
-  } 
-  
-  while(ch != EOF){
-    if(ch == ','){
-      cout << " ";
-    }else {
-    cout << ch;
-    }
-    ch = gets(fp);
+
+  char str[255];
+  char str2[255];
+
+  //Ignoring the fst line
+  in.ignore(25, '\n');
+  in2.ignore(20, '\n');
+
+  //reading ratings.csv
+  while(in) {
+    in.getline(str, 255);  // delim defaults to '\n'
+    v1[i] = str;
+    i += 1; 
+    //if(in) cout << str << endl;
   }
-  cout << "\n";
+
+  //reading targests.csv
+  while(in2){
+    in2.getline(str2, 255);
+    
+    //if(in2) cout << str2 << endl;
+  }
   
-  fclose(fp2);
-  fclose(fp);
+  in.close();
+
   return 0;
 }
