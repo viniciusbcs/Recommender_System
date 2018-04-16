@@ -13,13 +13,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
   
-  //vector to put file content
-  vector<char> v1;
-  vector<int> v2;
-  
-  //counter
-  int i = 0;
-  int ii = 0;
+  list<string> uid;
 
   //Opening ratings.csv and targets.csv
   char ch;
@@ -48,10 +42,20 @@ int main(int argc, char *argv[]) {
 
   //reading ratings.csv
   while(in) { 
-    in.getline(str, 255);  // delim defaults to '\n'    
-    if(in) cout << str << endl;
+    in.getline(str, 255, ':');  // delim defaults to '\n'    
+    //in.ignore(1,':');
+    uid.push_back(str);
+    //if(in) cout << str << endl;
   }
 
+  while(!uid.empty()){
+    cout << uid.front();
+    uid.pop_front();
+    cout << "\n";
+  }
+
+  cout << "TESTE " << uid.front() << "\n";
+  
   //reading targests.csv
   while(in2){
     in2.getline(str2, 255);
