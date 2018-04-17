@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string.h>
 #include <vector>
 #include <fstream>
 #include <stdio.h>
@@ -10,6 +11,7 @@
 #include <cstring>
 #include <list>
 #include <iterator>
+#include <cmath>
 using namespace std;
 
 int main(int argc, char *argv[]) {
@@ -77,67 +79,97 @@ int main(int argc, char *argv[]) {
   }
   
   //vector
-  long int aux = 0;
+  long int aux1 = 0;
+  long int aux2 = 0;
+  long int aux3 = 0;
+  long int aux4 = 0;
+  long int aux5 = 0;
 
   //target.csvs
   vector <string> uservec2(userlist2.size());
   vector <string> productvec2(productlist2.size());
   
   //ratings.csv
-  vector<string> uservector(userlist.size());
+  vector <string> uservector(userlist.size());
   vector <string> productvec(productlist.size());
   vector <int> ratevec(ratelist.size());
 
   //targets file in a vector (uservec2)
   while(!userlist2.empty()){
-    uservec2[aux] =  userlist2.front();
+    uservec2[aux1] =  userlist2.front();
     userlist2.pop_front();
-    aux += 1;
+    aux1 += 1;
   } 
     
   userlist2.clear();
-  aux = 0;
 
   //targets file in a vector (productvec2)
   while(!productlist2.empty()){
-    productvec2[aux] = productlist2.front();
+    productvec2[aux2] = productlist2.front();
     productlist2.pop_front();
-    aux += 1;
+    aux2 += 1;
   } //up to here is ok! No seg fault!
   
-  productlist.clear();
-  aux = 0;
+  productlist2.clear();
 
   //ratings file in a vector (uservec)
   while(!userlist.empty()){
-    uservector[aux] =  userlist.front();
+    uservector[aux3] =  userlist.front();
     userlist.pop_front();
-    aux += 1;
+    aux3 += 1;
   }
 
   userlist.clear();
-  aux = 0;
   
   //ratings file in a vector (productlist)
   while(!productlist.empty()){
-    productvec[aux] = productlist.front();
+    productvec[aux4] = productlist.front();
     productlist.pop_front();
-    aux += 1;
+    aux4 += 1;
   }
 
   productlist.clear();
-  aux = 0;
+  
   //ratings file in a vector (rates)
   while(!ratelist.empty()){
-    ratevec[aux] = stoi(ratelist.front());
+    ratevec[aux5] = stoi(ratelist.front());
     ratelist.pop_front();
-    aux += 1;
+    aux5 += 1;
   }
   
   ratelist.clear();
 
+  //Close files
   in.close();
   in2.close();
+  cout << aux5;
 
+  //Open writing file;
+  ofstream myfile;
+  myfile.open ("submission.csv");
+  myfile << "UserId:ItemId,Prediction\n";
+
+  int result1;
+  int result2;
+  int final;
+  //Select the target
+  for(long int loop = 0; loop < aux1; loop++){
+    //myfile << uservec2[loop]<< ":" << productvec2[loop] << ",\n";
+    if(uservec2[loop] != uservector[loop]){
+      for(long int loop2 = 0; loop2 < 1528; loop2++){
+        if(productvec2[loop] == productvec[loop2]){
+        //myfile << uservec2[loop]<< ":" << productvec2[loop] << ",\n";
+        }
+        
+         result1 =ratevec[loop2] + ratevec[loop];
+         result2 = sqrt(pow(ratevec[loop2],2))+sqrt(pow(ratevec[loop],2));       
+         
+      }
+    }
+    final = (result1/result2)*6;
+    myfile << uservec2[loop]<< ":" << productvec2[loop] << "," << final << "\n";
+  }
+  
+  myfile.close();
   return 0;
 }
