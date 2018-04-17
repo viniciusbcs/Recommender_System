@@ -7,3 +7,10 @@ linha do header. e coloca o resto do conteudo separadamente em uma lista. A fun�
 para ler as linhas e separar o conteudo entre os dois pontos e as virgulas.
 Em seguida passamos o conteudo da lista para uma estrutura de vetor, um vetor para cada header, logo e seguida as
 listas sao apagadas para evitar ocupar espaço desnecessário na memória.
+
+O próximo passo é calcular a similaridadeentre os intens utilizando a formula da similaridade do cossseno.
+e em seguida fazer a predição entre os usuários.
+
+Por fim um arquivo de saída (predictions.csv) é gerado para a escrita dos resultados baseado no arquivo targets.csv.
+
+
