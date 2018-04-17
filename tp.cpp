@@ -9,6 +9,7 @@
 #include <iomanip>
 #include <cstring>
 #include <list>
+#include <iterator>
 using namespace std;
 
 int main(int argc, char *argv[]) {
@@ -74,22 +75,69 @@ int main(int argc, char *argv[]) {
     userlist2.push_back(user2);
     productlist2.push_back(product2);
   }
+  
+  //vector
+  long int aux = 0;
 
-  /* Out teste
+  //target.csvs
+  vector <string> uservec2(userlist2.size());
+  vector <string> productvec2(productlist2.size());
+  
+  //ratings.csv
+  vector<string> uservector(userlist.size());
+  vector <string> productvec(productlist.size());
+  vector <int> ratevec(ratelist.size());
+
+  //targets file in a vector (uservec2)
+  while(!userlist2.empty()){
+    uservec2[aux] =  userlist2.front();
+    userlist2.pop_front();
+    aux += 1;
+  } 
+    
+  userlist2.clear();
+  aux = 0;
+
+  //targets file in a vector (productvec2)
+  while(!productlist2.empty()){
+    productvec2[aux] = productlist2.front();
+    productlist2.pop_front();
+    aux += 1;
+  } //up to here is ok! No seg fault!
+  
+  productlist.clear();
+  aux = 0;
+
+  //ratings file in a vector (uservec)
   while(!userlist.empty()){
-    cout << userlist.front();
+    uservector[aux] =  userlist.front();
     userlist.pop_front();
-    cout << "\n";
+    aux += 1;
+  }
+
+  userlist.clear();
+  aux = 0;
+  
+  //ratings file in a vector (productlist)
+  while(!productlist.empty()){
+    productvec[aux] = productlist.front();
+    productlist.pop_front();
+    aux += 1;
+  }
+
+  productlist.clear();
+  aux = 0;
+  //ratings file in a vector (rates)
+  while(!ratelist.empty()){
+    ratevec[aux] = stoi(ratelist.front());
+    ratelist.pop_front();
+    aux += 1;
   }
   
-  while(!productlist2.empty()){
-    cout << productlist2.front();
-    productlist2.pop_front();
-    cout << "\n";
-  }
-  */
+  ratelist.clear();
 
   in.close();
   in2.close();
+
   return 0;
 }
