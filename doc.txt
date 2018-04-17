@@ -1,0 +1,9 @@
+O trabalho consiste na implementação de um sistema de recomendação baseado em memory-based.
+São fornecidas duas entradas (ratings.csv e targets.csv) para o código. O mesmo pega o conteudo
+desses dois arquivos utilizando a biblioteca da stl fstream. Para cada arquivo ele ignora a primeira
+linha do heade. O mesmo pega o conteudo
+desses dois arquivos utilizando a biblioteca da stl fstream. Para cada arquivo ele ignora a primeira
+linha do header. e coloca o resto do conteudo separadamente em uma lista. A função getine é utilizada 
+para ler as linhas e separar o conteudo entre os dois pontos e as virgulas.
+Em seguida passamos o conteudo da lista para uma estrutura de vetor, um vetor para cada header, logo e seguida as
+listas sao apagadas para evitar ocupar espaço desnecessário na memória.
